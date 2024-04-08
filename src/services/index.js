@@ -8,78 +8,68 @@ const {
   validLinkedinTrackingId,
   validHubspotTrackingId,
   getCookie,
-  validGTrackingId
-} = require('../helper')
+  validGTrackingId,
+} = require(`../helper`)
 
 const {
   addGoogleAnalytics,
   initializeGoogleAnalytics,
-  trackGoogleAnalytics
-} = require('./google-analytics')
+  trackGoogleAnalytics,
+} = require(`./google-analytics`)
 
 const {
   addGoogleTagManager,
   initializeGoogleTagManager,
-  trackGoogleTagManager
-} = require('./google-tag-manager')
+  trackGoogleTagManager,
+} = require(`./google-tag-manager`)
 
 const {
   addFacebookPixel,
   initializeFacebookPixel,
-  trackFacebookPixel
-} = require('./facebook')
+  trackFacebookPixel,
+} = require(`./facebook`)
 
 const {
   addTikTokPixel,
   initializeTikTokPixel,
-  trackTikTokPixel
-} = require('./tiktok')
+  trackTikTokPixel,
+} = require(`./tiktok`)
 
-const {
-  addHotjar,
-  initializeHotjar,
-  trackHotjar
-} = require('./hotjar')
+const { addHotjar, initializeHotjar, trackHotjar } = require(`./hotjar`)
 
-const {
-  addChatwoot
-} = require('./chatwoot')
+const { addChatwoot } = require(`./chatwoot`)
 
-const {
-  addLinkedin,
-  initializeLinkedin
-} = require('./linkedin')
+const { addLinkedin, initializeLinkedin } = require(`./linkedin`)
 
-const {
-  addHubspot,
-  initializeHubspot
-} = require('./hubspot')
+const { addHubspot, initializeHubspot } = require(`./hubspot`)
 
 const {
   addGoogleTag,
   initializeGoogleTag,
-  trackGoogleTag
-} = require('./google-tag');
+  trackGoogleTag,
+} = require(`./google-tag`)
 
-exports.initializeAndTrackGoogleAnalytics = (options, location) => {
-  if (
-    getCookie(options.cookieName) === `true` &&
-    validGATrackingId(options)
-  ) {
+exports.initializeAndTrackGoogleAnalytics = (
+  options,
+  consentOptions,
+  location
+) => {
+  if (validGATrackingId(options)) {
     addGoogleAnalytics(options).then((status) => {
       if (status) {
-        initializeGoogleAnalytics(options)
+        initializeGoogleAnalytics(options, consentOptions)
         trackGoogleAnalytics(options, location)
       }
     })
   }
 }
 
-exports.initializeAndTrackGoogleTagManager = (options, location) => {
-  if (
-    getCookie(options.cookieName) === `true` &&
-    validGTMTrackingId(options)
-  ) {
+exports.initializeAndTrackGoogleTagManager = (
+  options,
+  consentOptions,
+  location
+) => {
+  if (validGTMTrackingId(options)) {
     let environmentParamStr = ``
     if (options.gtmAuth && options.gtmPreview) {
       environmentParamStr = `&gtm_auth=${options.gtmAuth}&gtm_preview=${options.gtmPreview}&gtm_cookies_win=x`
@@ -87,18 +77,26 @@ exports.initializeAndTrackGoogleTagManager = (options, location) => {
 
     addGoogleTagManager(options, environmentParamStr).then((status) => {
       if (status) {
-        initializeGoogleTagManager(options)
+        initializeGoogleTagManager(options, consentOptions)
         trackGoogleTagManager(options, location)
       }
     })
   }
 }
 
+exports.initializeGoogleTag = (options, consentOptions, location) => {
+  if (validGTrackingId(options)) {
+    addGoogleTag(options).then((status) => {
+      if (status) {
+        initializeGoogleTag(options, consentOptions)
+        trackGoogleTag(options, location)
+      }
+    })
+  }
+}
+
 exports.initializeAndTrackFacebookPixel = (options) => {
-  if (
-    getCookie(options.cookieName) === `true` &&
-    validFbPixelId(options)
-  ) {
+  if (getCookie(options.cookieName) === `true` && validFbPixelId(options)) {
     addFacebookPixel().then((status) => {
       if (status) {
         initializeFacebookPixel(options)
@@ -109,10 +107,7 @@ exports.initializeAndTrackFacebookPixel = (options) => {
 }
 
 exports.initializeAndTrackTikTokPixel = (options) => {
-  if (
-    getCookie(options.cookieName) === `true` &&
-    validTikTokPixelId(options)
-  ) {
+  if (getCookie(options.cookieName) === `true` && validTikTokPixelId(options)) {
     addTikTokPixel().then((status) => {
       if (status) {
         initializeTikTokPixel(options)
@@ -123,10 +118,7 @@ exports.initializeAndTrackTikTokPixel = (options) => {
 }
 
 exports.initializeAndTrackHotjar = (options) => {
-  if (
-    getCookie(options.cookieName) === `true` &&
-    validHotjarId(options)
-  ) {
+  if (getCookie(options.cookieName) === `true` && validHotjarId(options)) {
     addHotjar(options).then((status) => {
       if (status) {
         initializeHotjar(options)
@@ -156,7 +148,7 @@ exports.initializeChatwoot = (options) => {
   ) {
     addChatwoot(options).then((status) => {
       if (status) {
-        console.info('Chat is added and running')
+        console.info(`Chat is added and running`)
       }
     })
   }
@@ -170,20 +162,6 @@ exports.initializeHubspot = (options) => {
     addHubspot(options).then((status) => {
       if (status) {
         initializeHubspot(options)
-      }
-    })
-  }
-}
-
-exports.initializeGoogleTag = (options, location) => {
-  if (
-    getCookie(options.cookieName) === `true` &&
-    validGTrackingId(options)
-  ) {
-    addGoogleTag(options).then((status) => {
-      if (status) {
-        initializeGoogleTag(options)
-        trackGoogleTag(options, location)
       }
     })
   }

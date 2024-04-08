@@ -21,16 +21,26 @@ module.exports = {
     {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
+        googleConsent: {
+          adStorage: "gatsby-gdpr-google-ad-storage", // default
+          analyticsStorage: "gatsby-gdpr-google-analytics-storage", // default
+          functionalityStorage: "gatsby-gdpr-google-functionality-storage", // default
+          personalizationStorage: "gatsby-gdpr-google-personalization-storage", // default
+          adUserData: "gatsby-gdpr-google-ad-user-data", // default
+          adPersonalization: "gatsby-gdpr-google-ad-personalization", // default
+          waitForUpdate: 500 // default
+        },
         googleAnalytics: {
           trackingId: 'YOUR_GOOGLE_ANALYTICS_TRACKING_ID', // leave empty if you want to disable the tracker
-          cookieName: 'gatsby-gdpr-google-analytics', // default
           anonymize: true, // default
           allowAdFeatures: false // default
         },
         googleTagManager: {
           trackingId: 'YOUR_GOOGLE_TAG_MANAGER_TRACKING_ID', // leave empty if you want to disable the tracker
-          cookieName: 'gatsby-gdpr-google-tagmanager', // default
           dataLayerName: 'dataLayer', // default
+        },
+        googleTag: {
+          trackingIds: ['YOUR_GOOGLE_TAG_IDS'],
         },
         facebookPixel: {
           pixelId: 'YOUR_FACEBOOK_PIXEL_ID', // leave empty if you want to disable the tracker
@@ -53,10 +63,6 @@ module.exports = {
           trackingId: 'YOUR_HUBSPOT_TRACKING_ID', // leave empty if you want to disable the tracker
           cookieName: 'gatsby-gdpr-hubspot', // default
         },
-        googleTag: {
-            trackingIds: ['YOUR_GOOGLE_TAG_IDS'],
-            cookieName: 'gatsby-gpdr-google-tag'
-        },
         // defines the environments where the tracking should be available  - default is ["production"]
         environments: ['production', 'development']
       },
@@ -64,6 +70,23 @@ module.exports = {
   ],
 }
 ```
+
+### Google Consent Mode v2
+We're happy to announce that we now support GCMv2. To use any of the Google trackers you need to manage the Google consent cookies (see config example above). If you fail to update the consent cookies the Google trackers will be initialized with the default values thus preventing most of the tracking.
+
+```javascript
+  ad_storage: "denied",
+  analytics_storage: "granted",
+  functionality_storage: "granted",
+  personalization_storage: "denied",
+  ad_user_data: "denied",
+  ad_personalization: "denied",
+  security_storage: "granted",
+  wait_for_update: 500
+```
+
+Google tools will not work properly if the consent cookies are not set correctly. The plugin will not set the cookies for you. You need to manage the cookies in your cookie banner.
+
 
 ## How it works
 

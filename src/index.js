@@ -21,15 +21,15 @@ exports.initializeAndTrack = (location) => {
         `Please provide a reach router location to the initializeAndTrack function.`
       )
     } else {
-      initializeAndTrackGoogleAnalytics(options.googleAnalytics, location)
-      initializeAndTrackGoogleTagManager(options.googleTagManager, location)
+      initializeAndTrackGoogleAnalytics(options.googleAnalytics, options.googleConsent, location)
+      initializeAndTrackGoogleTagManager(options.googleTagManager, options.googleConsent, location)
+      initializeGoogleTag(options.googleTag, options.googleConsent, location)
       initializeAndTrackFacebookPixel(options.facebookPixel)
       initializeAndTrackTikTokPixel(options.tikTokPixel)
       initializeAndTrackHotjar(options.hotjar)
       initializeChatwoot(options.chatwoot)
       initializeLinkedin(options.linkedin)
       initializeHubspot(options.hubspot)
-      initializeGoogleTag(options.googleTag, location)
     }
   }
 }

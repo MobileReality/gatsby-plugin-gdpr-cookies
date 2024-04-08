@@ -1,4 +1,4 @@
-const { validGATrackingId, getCookie } = require(`../helper`)
+const { validGATrackingId, getCookie, initializeGTagJS } = require(`../helper`)
 
 exports.addGoogleAnalytics = ({ trackingId }) => {
   return new Promise((resolve, reject) => {
@@ -17,17 +17,12 @@ exports.addGoogleAnalytics = ({ trackingId }) => {
   })
 }
 
-exports.initializeGoogleAnalytics = (options) => {
+exports.initializeGoogleAnalytics = (options, consentOptions) => {
   if (
     !window.gatsbyPluginGDPRCookiesGoogleAnalyticsInitialized &&
-    getCookie(options.cookieName) === `true` &&
     validGATrackingId(options)
   ) {
-    window.dataLayer = window.dataLayer || []
-    window.gtag = function () {
-      window.dataLayer.push(arguments)
-    }
-    window.gtag(`js`, new Date())
+    initializeGTagJS(consentOptions)
 
     let gaAnonymize = options.anonymize
     let gaAllowAdFeatures = options.allowAdFeatures

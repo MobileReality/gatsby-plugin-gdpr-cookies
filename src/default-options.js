@@ -1,12 +1,16 @@
+import { getDefaultConsentTagOptions } from "./helper"
+
 export const defaultOptions = {
   environments: [`production`],
+  googleConsent: {
+    cookieNames: getDefaultConsentTagOptions(),
+    waitForUpdate: 500,
+  },
   googleAnalytics: {
-    cookieName: `gatsby-gdpr-google-analytics`,
     anonymize: true,
     allowAdFeatures: false,
   },
   googleTagManager: {
-    cookieName: `gatsby-gdpr-google-tagmanager`,
     dataLayerName: `dataLayer`,
     routeChangeEvent: `gatsbyRouteChange`,
   },
@@ -27,8 +31,5 @@ export const defaultOptions = {
   },
   hubspot: {
     cookieName: `gatsby-gpdr-hubspot`,
-  },
-  googleTag: {
-    cookieName: `gatsby-gpdr-google-tag`,
   },
 }

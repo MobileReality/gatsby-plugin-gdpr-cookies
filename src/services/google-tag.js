@@ -1,4 +1,4 @@
-const { validGTrackingId, getCookie } = require(`../helper`)
+const { validGTrackingId, getCookie, initializeGTagJS } = require(`../helper`)
 import { Minimatch } from "minimatch"
 
 exports.addGoogleTag = (options) => {
@@ -43,10 +43,9 @@ exports.addGoogleTag = (options) => {
   })
 }
 
-exports.initializeGoogleTag = (options) => {
+exports.initializeGoogleTag = (options, consentOptions) => {
   if (
     !window.gatsbyPluginGDPRCookiesGoogleTagInitialized &&
-    getCookie(options.cookieName) === `true` &&
     validGTrackingId(options)
   ) {
     const gtagConfig = options.gtagConfig || {}
@@ -89,9 +88,7 @@ exports.initializeGoogleTag = (options) => {
           ? `!(navigator.doNotTrack == "1" || window.doNotTrack == "1")`
           : `true`
       }) {
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function(){window.dataLayer && window.dataLayer.push(arguments);}
-        window.gtag('js', new Date());
+        ${initializeGTagJS(consentOptions)}
         ${options.trackingIds
           .map(
             (trackingId) =>
