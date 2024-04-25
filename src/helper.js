@@ -1,4 +1,4 @@
-const { GOOGLE_CONSENT_TAGS } = require(`./constants`)
+const { GOOGLE_CONSENT_TAGS, COOKIE_CONSENT_COUNTRIES } = require(`./constants`)
 
 exports.validGATrackingId = (options) =>
   options.trackingId && options.trackingId.trim() !== ``
@@ -63,6 +63,18 @@ exports.setGoogleConsent = (consentOptions) => {
   ) {
     window.gtag(`consent`, `default`, {
       ...exports.getGoogleConsentFromCookie(consentOptions),
+      security_storage: `granted`,
+      region: COOKIE_CONSENT_COUNTRIES,
+      wait_for_update: consentOptions.waitForUpdate,
+    })
+
+    window.gtag(`consent`, `default`, {
+      ad_storage: `granted`,
+      ad_user_data: `granted`,
+      ad_personalization: `granted`,
+      analytics_storage: `granted`,
+      functionality_storage: `granted`,
+      personalization_storage: `granted`,
       security_storage: `granted`,
       wait_for_update: consentOptions.waitForUpdate,
     })
