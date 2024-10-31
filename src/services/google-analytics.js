@@ -11,7 +11,10 @@ exports.addGoogleAnalytics = ({ trackingId }) => {
       window.gatsbyPluginGDPRCookiesGoogleAnalyticsAdded = true
       resolve(true)
     }
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`;
+    script.async = false;
+    script.defer = true;
+
 
     head.appendChild(script)
   })
