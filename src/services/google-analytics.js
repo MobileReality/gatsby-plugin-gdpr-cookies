@@ -12,6 +12,8 @@ exports.addGoogleAnalytics = ({ trackingId }) => {
       resolve(true)
     }
     script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`
+    script.defer = ""
+
 
     head.appendChild(script)
   })
