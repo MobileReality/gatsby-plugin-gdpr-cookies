@@ -84,7 +84,7 @@ exports.initializeAndTrackGoogleTagManager = (
   }
 };
 
-exports.initializeGoogleTag = (options, consentOptions, location) => {
+exports.initializeAndTrackGoogleTag = (options, consentOptions, location) => {
   if (validGTrackingId(options)) {
     addGoogleTag(options).then((status) => {
       if (status) {

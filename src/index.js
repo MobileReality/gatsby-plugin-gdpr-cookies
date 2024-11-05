@@ -7,7 +7,7 @@ const {
   initializeChatwoot,
   initializeLinkedin,
   initializeHubspot,
-  initializeGoogleTag,
+  initializeAndTrackGoogleTag,
 } = require("./services");
 
 const { isEnvironmentValid } = require("./helper");
@@ -31,7 +31,11 @@ exports.initializeAndTrack = (location) => {
         options.googleConsent,
         location
       );
-      initializeGoogleTag(options.googleTag, options.googleConsent, location);
+      initializeAndTrackGoogleTag(
+        options.googleTag,
+        options.googleConsent,
+        location
+      );
       initializeAndTrackFacebookPixel(options.facebookPixel);
       initializeAndTrackTikTokPixel(options.tikTokPixel);
       initializeAndTrackHotjar(options.hotjar);

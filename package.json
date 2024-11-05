@@ -1,7 +1,7 @@
 {
   "name": "@mobile-reality/gatsby-plugin-gdpr-cookies",
   "description": "Gatsby plugin to add google analytics, google tag manager facebook pixel, tik tok pixel, hotjar, hubspot in a gdpr form to your site. Consent coming soon.",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "author": "Mobile Reality <biuro@mobilereality.pl> (https://mobilereality.pl)",
   "contributors": [
     {
