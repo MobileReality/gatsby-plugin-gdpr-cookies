@@ -9,45 +9,45 @@ const {
   validHubspotTrackingId,
   getCookie,
   validGTrackingId,
-} = require(`../helper`)
+} = require("../helper");
 
 const {
   addGoogleAnalytics,
   initializeGoogleAnalytics,
   trackGoogleAnalytics,
-} = require(`./google-analytics`)
+} = require("./google-analytics");
 
 const {
   addGoogleTagManager,
   initializeGoogleTagManager,
   trackGoogleTagManager,
-} = require(`./google-tag-manager`)
+} = require("./google-tag-manager");
 
 const {
   addFacebookPixel,
   initializeFacebookPixel,
   trackFacebookPixel,
-} = require(`./facebook`)
+} = require("./facebook");
 
 const {
   addTikTokPixel,
   initializeTikTokPixel,
   trackTikTokPixel,
-} = require(`./tiktok`)
+} = require("./tiktok");
 
-const { addHotjar, initializeHotjar, trackHotjar } = require(`./hotjar`)
+const { addHotjar, initializeHotjar, trackHotjar } = require("./hotjar");
 
-const { addChatwoot } = require(`./chatwoot`)
+const { addChatwoot } = require("./chatwoot");
 
-const { addLinkedin, initializeLinkedin } = require(`./linkedin`)
+const { addLinkedin, initializeLinkedin } = require("./linkedin");
 
-const { addHubspot, initializeHubspot } = require(`./hubspot`)
+const { addHubspot, initializeHubspot } = require("./hubspot");
 
 const {
   addGoogleTag,
   initializeGoogleTag,
   trackGoogleTag,
-} = require(`./google-tag`)
+} = require("./google-tag");
 
 exports.initializeAndTrackGoogleAnalytics = (
   options,
@@ -57,12 +57,12 @@ exports.initializeAndTrackGoogleAnalytics = (
   if (validGATrackingId(options)) {
     addGoogleAnalytics(options).then((status) => {
       if (status) {
-        initializeGoogleAnalytics(options, consentOptions)
-        trackGoogleAnalytics(options, location)
+        initializeGoogleAnalytics(options, consentOptions);
+        trackGoogleAnalytics(options, location);
       }
-    })
+    });
   }
-}
+};
 
 exports.initializeAndTrackGoogleTagManager = (
   options,
@@ -70,99 +70,99 @@ exports.initializeAndTrackGoogleTagManager = (
   location
 ) => {
   if (validGTMTrackingId(options)) {
-    let environmentParamStr = ``
+    let environmentParamStr = "";
     if (options.gtmAuth && options.gtmPreview) {
-      environmentParamStr = `&gtm_auth=${options.gtmAuth}&gtm_preview=${options.gtmPreview}&gtm_cookies_win=x`
+      environmentParamStr = `&gtm_auth=${options.gtmAuth}&gtm_preview=${options.gtmPreview}&gtm_cookies_win=x`;
     }
 
     addGoogleTagManager(options, environmentParamStr).then((status) => {
       if (status) {
-        initializeGoogleTagManager(options, consentOptions)
-        trackGoogleTagManager(options, location)
+        initializeGoogleTagManager(options, consentOptions);
+        trackGoogleTagManager(options, location);
       }
-    })
+    });
   }
-}
+};
 
 exports.initializeGoogleTag = (options, consentOptions, location) => {
   if (validGTrackingId(options)) {
     addGoogleTag(options).then((status) => {
       if (status) {
-        initializeGoogleTag(options, consentOptions)
-        trackGoogleTag(options, location)
+        initializeGoogleTag(options, consentOptions);
+        trackGoogleTag(options, location);
       }
-    })
+    });
   }
-}
+};
 
 exports.initializeAndTrackFacebookPixel = (options) => {
-  if (getCookie(options.cookieName) === `true` && validFbPixelId(options)) {
+  if (getCookie(options.cookieName) === "true" && validFbPixelId(options)) {
     addFacebookPixel().then((status) => {
       if (status) {
-        initializeFacebookPixel(options)
-        trackFacebookPixel(options)
+        initializeFacebookPixel(options);
+        trackFacebookPixel(options);
       }
-    })
+    });
   }
-}
+};
 
 exports.initializeAndTrackTikTokPixel = (options) => {
-  if (getCookie(options.cookieName) === `true` && validTikTokPixelId(options)) {
+  if (getCookie(options.cookieName) === "true" && validTikTokPixelId(options)) {
     addTikTokPixel().then((status) => {
       if (status) {
-        initializeTikTokPixel(options)
-        trackTikTokPixel(options)
+        initializeTikTokPixel(options);
+        trackTikTokPixel(options);
       }
-    })
+    });
   }
-}
+};
 
 exports.initializeAndTrackHotjar = (options) => {
-  if (getCookie(options.cookieName) === `true` && validHotjarId(options)) {
+  if (getCookie(options.cookieName) === "true" && validHotjarId(options)) {
     addHotjar(options).then((status) => {
       if (status) {
-        initializeHotjar(options)
-        trackHotjar(options)
+        initializeHotjar(options);
+        trackHotjar(options);
       }
-    })
+    });
   }
-}
+};
 
 exports.initializeLinkedin = (options) => {
   if (
-    getCookie(options.cookieName) === `true` &&
+    getCookie(options.cookieName) === "true" &&
     validLinkedinTrackingId(options)
   ) {
     addLinkedin(options).then((status) => {
       if (status) {
-        initializeLinkedin(options)
+        initializeLinkedin(options);
       }
-    })
+    });
   }
-}
+};
 
 exports.initializeChatwoot = (options) => {
   if (
-    getCookie(options.cookieName) === `true` &&
+    getCookie(options.cookieName) === "true" &&
     validChatwootConfig(options)
   ) {
     addChatwoot(options).then((status) => {
       if (status) {
-        console.info(`Chat is added and running`)
+        console.info("Chat is added and running");
       }
-    })
+    });
   }
-}
+};
 
 exports.initializeHubspot = (options) => {
   if (
-    getCookie(options.cookieName) === `true` &&
+    getCookie(options.cookieName) === "true" &&
     validHubspotTrackingId(options)
   ) {
     addHubspot(options).then((status) => {
       if (status) {
-        initializeHubspot(options)
+        initializeHubspot(options);
       }
-    })
+    });
   }
-}
+};
