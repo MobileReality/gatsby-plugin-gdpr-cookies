@@ -1,7 +1,7 @@
-import { getDefaultConsentTagOptions } from "./helper"
+import { getDefaultConsentTagOptions } from "./helper";
 
 export const defaultOptions = {
-  environments: [`production`],
+  environments: ["production"],
   googleConsent: {
     cookieNames: getDefaultConsentTagOptions(),
     waitForUpdate: 500,
@@ -11,25 +11,25 @@ export const defaultOptions = {
     allowAdFeatures: false,
   },
   googleTagManager: {
-    dataLayerName: `dataLayer`,
-    routeChangeEvent: `gatsbyRouteChange`,
+    dataLayerName: "dataLayer",
+    routeChangeEvent: "gatsbyRouteChange",
   },
   facebookPixel: {
-    cookieName: `gatsby-gdpr-facebook-pixel`,
+    cookieName: "gatsby-gdpr-facebook-pixel",
   },
   tikTokPixel: {
-    cookieName: `gatsby-gdpr-tiktok-pixel`,
+    cookieName: "gatsby-gdpr-tiktok-pixel",
   },
   hotjar: {
-    cookieName: `gatsby-gdpr-hotjar`,
+    cookieName: "gatsby-gdpr-hotjar",
   },
   chatwoot: {
-    cookieName: `gatsby-gdpr-chatwoot`,
+    cookieName: "gatsby-gdpr-chatwoot",
   },
   linkedin: {
-    cookieName: `gatsby-gdpr-linkedin`,
+    cookieName: "gatsby-gdpr-linkedin",
   },
   hubspot: {
-    cookieName: `gatsby-gpdr-hubspot`,
+    cookieName: "gatsby-gpdr-hubspot",
   },
-}
+};

@@ -10,7 +10,12 @@
     "prettier/flowtype",
     "prettier/react"
   ],
-  "plugins": ["flowtype", "prettier", "react", "filenames"],
+  "plugins": [
+    "flowtype",
+    "prettier",
+    "react",
+    "filenames"
+  ],
   "parserOptions": {
     "ecmaVersion": 2016,
     "sourceType": "module",
@@ -39,12 +44,18 @@
         "allowTaggedTemplates": true
       }
     ],
-    "consistent-return": ["error"],
-    "filenames/match-regex": ["error", "^[a-z-\\d\\.]+$", true],
+    "filenames/match-regex": [
+      "error",
+      "^[a-z-\\d\\.]+$",
+      true
+    ],
     "no-console": "warn",
     "no-inner-declarations": "off",
     "prettier/prettier": "error",
-    "quotes": ["error", "backtick"],
+    "quotes": [
+      "error",
+      "double"
+    ],
     "react/display-name": "off",
     "react/jsx-key": "warn",
     "react/no-unescaped-entities": "off",
