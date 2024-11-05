@@ -71,6 +71,8 @@ exports.initializeGoogleTag = (options, consentOptions) => {
         ? options.trackingIds[0]
         : "";
 
+    const restTrackingIds = options.trackingIds.slice(1);
+
     const renderHtml = () => `
       ${
         excludeGtagPaths.length
@@ -89,7 +91,7 @@ exports.initializeGoogleTag = (options, consentOptions) => {
           : "true"
       }) {
         ${initializeGTagJS(consentOptions)}
-        ${options.trackingIds
+        ${restTrackingIds
           .map(
             (trackingId) =>
               `window.gtag('config', '${trackingId}', ${JSON.stringify(
@@ -116,7 +118,6 @@ exports.trackGoogleTag = (options, location) => {
     getCookie(options.cookieName) === "true" &&
     validGTrackingId(options)
   ) {
-    // (function(){
     const pathIsExcluded =
       location &&
       typeof window.excludeGtagPaths !== "undefined" &&
@@ -140,6 +141,5 @@ exports.trackGoogleTag = (options, location) => {
       // simulate 2 rAF calls
       setTimeout(sendPageView, 32);
     }
-    // })();
   }
 };
