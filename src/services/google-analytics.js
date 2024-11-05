@@ -13,8 +13,7 @@ exports.addGoogleAnalytics = ({ trackingId }) => {
       resolve(true);
     };
     script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`;
-    script.async = false;
-    script.defer = true;
+    script.async = true;
 
     head.appendChild(script);
   });

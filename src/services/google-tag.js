@@ -28,7 +28,7 @@ exports.addGoogleTag = (options) => {
 
     const script = document.createElement("script");
     script.key = "gatsby-plugin-google-gtag";
-    script.defer = true;
+    script.async = true;
 
     script.onload = () => {
       window.gatsbyPluginGDPRCookiesGoogleTagAdded = true;
