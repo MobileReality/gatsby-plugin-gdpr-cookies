@@ -33,7 +33,8 @@ exports.validLinkedinTrackingId = (options) =>
 exports.validHubspotTrackingId = (options) =>
   options.trackingId && options.trackingId.trim() !== "";
 
-exports.validGTrackingId = (options) => options.trackingIds.length > 0;
+exports.validGTrackingId = (options) =>
+  options.trackingIds && options.trackingIds.length > 0;
 
 exports.getCookie = (name) => {
   const v = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
